@@ -27,8 +27,6 @@ def main_blum(path, ref_link):
         proxy = proxies_list[number].strip()
     else:
         proxy = proxies_list[counter].strip()
-        
-    counter = (counter + 1)
 
     data['proxy'] = proxy
     telegram_app.append_to_json_file('blum.json', data)  
@@ -40,6 +38,7 @@ def main_blum(path, ref_link):
 
 def main():
     logger.add("file.log", level="DEBUG")
+    global counter
     
     with open('all_refs.txt', 'r', encoding='utf-8') as fileobj:
         ref_links = fileobj.readlines()
@@ -64,6 +63,7 @@ def main():
                     logger.info(f"Account referal: {ref_link[ref_link.index('?'):]}")
 
                     main_blum(path.strip(), ref_link)                                                    #sub main
+                    counter += 1
                     break
                 else:
                     logger.warning('Launch proxyfier firstly')
@@ -76,6 +76,7 @@ def main():
                 else:
                     with open('bad_accounts.txt', 'a', encoding='utf-8') as fileobj:
                         fileobj.write(path + '\n')
+                        counter += 1
             finally:
                 logger.info(f"Finish account ...{short_path}\n")
     input()
