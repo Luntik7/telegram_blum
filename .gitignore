@@ -2,6 +2,5 @@ venv/
 .vscode/
 __pycache__/
 .idea/
-all_pathes.txt
 file.log
 blum.json
